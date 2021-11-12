@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Sports</string>
+    <string name="team_badge">Team Badge</string>
+    <string name="twitter">Twitter</string>
+    <string name="facebook">Facebook</string>
+    <string name="instagram">Instagram</string>
+    <string name="team_jersey">Team Jersey</string>
+    <string name="aceptar">Aceptar</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="cerrar">Cerrar</string>
+
+    <string name="foundationYear_">Año de Fundacion: %1$s</string>
+    <string name="filter">Filter</string>
+</resources>

@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="adapter"
+            type="com.juantobon20.sports.views.infoTeam.adapter.DialogAdapter" />
+
+        <variable
+            name="viewModel"
+            type="com.juantobon20.sports.views.infoTeam.viewModel.DialogTeamVM" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp">
+
+                <TextView
+                    android:id="@+id/lblName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{viewModel.team.nameAlt}"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/lblDescription"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="@{viewModel.team.description}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/lblName" />
+
+                <TextView
+                    android:id="@+id/lblFoundationYear"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/lblDescription"
+                    app:newText="@{viewModel.team.foundationYear}" />
+
+                <ImageView
+                    android:id="@+id/imgInsta"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="15dp"
+                    android:contentDescription="@string/instagram"
+                    android:onClick="@{() -> viewModel.loadUrl(viewModel.team.webInstagram)}"
+                    app:layout_constraintEnd_toStartOf="@+id/imgFace"
+                    app:layout_constraintTop_toBottomOf="@+id/lblFoundationYear"
+                    app:srcCompat="@drawable/ic_instagram_25dp" />
+
+                <ImageView
+                    android:id="@+id/imgFace"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:contentDescription="@string/facebook"
+                    android:onClick="@{() -> viewModel.loadUrl(viewModel.team.webFacebook)}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/lblFoundationYear"
+                    app:srcCompat="@drawable/ic_facebook_25dp" />
+
+                <ImageView
+                    android:id="@+id/imgTwi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="10dp"
+                    android:contentDescription="@string/twitter"
+                    android:onClick="@{() -> viewModel.loadUrl(viewModel.team.webTwitter)}"
+                    app:layout_constraintStart_toEndOf="@+id/imgFace"
+                    app:layout_constraintTop_toBottomOf="@+id/lblFoundationYear"
+                    app:srcCompat="@drawable/ic_twitter_25dp" />
+
+                <ImageView
+                    android:id="@+id/imgBadge"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginTop="10dp"
+                    android:contentDescription="@string/team_badge"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline2"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/imgFace"
+                    app:onLoadUrl="@{viewModel.team.badge}"
+                    app:srcCompat="@drawable/badge" />
+
+                <ImageView
+                    android:id="@+id/imgJersey"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginTop="10dp"
+                    android:contentDescription="@string/team_jersey"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/guideline2"
+                    app:layout_constraintTop_toBottomOf="@+id/imgFace"
+                    app:onLoadUrl="@{viewModel.team.jersey}"
+                    app:srcCompat="@drawable/jersey" />
+
+                <TextView
+                    android:id="@+id/lblEvent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    android:text="@{viewModel.nameEvents}"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintTop_toBottomOf="@+id/imgBadge" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rcEvents"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/lblEvent"
+                    app:setAdapter="@{adapter}"
+                    app:submitList="@{viewModel.events}"
+                    tools:listitem="@layout/item_event" />
+
+                <Button
+                    android:id="@+id/btnCerrar"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/cerrar"
+                    android:textAllCaps="false"
+                    android:textSize="20sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/rcEvents" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent=".5" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
+    </androidx.cardview.widget.CardView>
+</layout>
